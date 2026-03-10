@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Josh Swan | Portfolio</title>
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      :root{
+        --midnight: #1F2A44;   /* Primary */
+        --steel:    #3F72AF;   /* Secondary */
+        --bg:       #F5F7FA;   /* Background */
+        --card:     #FFFFFF;   /* Cards */
+        --muted:    #9AA5B1;   /* Muted text/borders */
+        --teal:     #2EC4B6;   /* Accent */
+      }
+
+      body { background: var(--bg); }
+
+      /* Accessibility */
+      .skip-link{
+        position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+      }
+      .skip-link:focus{
+        left: 1rem; top: 1rem; width:auto; height:auto; padding:.5rem .75rem;
+        background:#fff; border:1px solid rgba(31,42,68,.2); border-radius:.75rem;
+        z-index: 9999;
+      }
+
+      /* Navbar */
+      .navbar { background: var(--midnight); }
+      .navbar .nav-link, .navbar-brand { color: rgba(255,255,255,.92); }
+      .navbar .nav-link:hover { color: #fff; }
+
+      /* Hero */
+      .hero {
+        background: radial-gradient(1200px 600px at 10% 0%, rgba(63,114,175,.35), transparent 60%),
+                    radial-gradient(900px 500px at 80% 20%, rgba(46,196,182,.22), transparent 60%),
+                    linear-gradient(180deg, var(--midnight), #162038);
+        color: #fff;
+      }
+
+      .badge-tech {
+        background: rgba(255,255,255,.12);
+        border: 1px solid rgba(255,255,255,.18);
+        color: rgba(255,255,255,.92);
+        font-weight: 500;
+      }
+
+      /* Cards */
+      .card {
+        border: 1px solid rgba(154,165,177,.25);
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(31,42,68,.06);
+        background: var(--card);
+      }
+
+      .text-muted2 { color: var(--muted) !important; }
+
+      .btn-primary {
+        background: var(--steel);
+        border-color: var(--steel);
+      }
+      .btn-primary:hover {
+        background: var(--teal);
+        border-color: var(--teal);
+      }
+
+      .pill {
+        border: 1px solid rgba(154,165,177,.25);
+        border-radius: 999px;
+        padding: .4rem .75rem;
+        background: rgba(245,247,250,.6);
+        font-weight: 600;
+      }
+
+      .soon {
+        background: #FFE8A3;
+        color: #7A5C00;
+        border: 1px solid #FFD666;
+      }
+
+      .callout {
+        border-left: 4px solid var(--teal);
+        background: rgba(46,196,182,.08);
+        border-radius: .75rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .project-card:hover{
+        transform: translateY(-2px);
+        transition: transform .15s ease;
+      }
+
+      /* Headshot */
+      .headshot {
+        width: 164px;
+        height: 164px;
+        border-radius: 999px;
+        border: 2px solid rgba(255,255,255,.25);
+        box-shadow: 0 10px 25px rgba(0,0,0,.25);
+      }
+
+      /* Footer */
+      footer {
+        background: var(--midnight);
+        color: rgba(255,255,255,.85);
+      }
+      footer a { color: rgba(255,255,255,.9); }
+      footer a:hover { color: #fff; }
+
+      /* Offset anchor jumps for sticky navbar */
+      section[id] {
+        scroll-margin-top: 90px; /* adjust to your navbar height */
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="#">Josh Swan</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero py-5">
+      <div class="container py-4">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <p class="text-white-50 mb-2">Senior Data Scientist • 7 years experience • ML systems & APIs</p>
+            <h1 class="display-6 fw-bold mb-3">Portfolio of projects using ML, DL, LLMs & NLP</h1>
+            <p class="lead mb-4">
+              Showcasing end-to-end work from business problem to product: experiment tracking, model evaluation, API deployment, and
+              interactive project pages.
+            </p>
+            <h2>Portfolio Tech Stack</h2>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="badge badge-tech rounded-pill px-3 py-2">Python</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">SQL</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">PostgreSQL</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">scikit-learn</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">PyTorch</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Keras</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">MLflow</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">FastAPI</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Docker</span>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <!-- Add in logos here -->
+              <a class="btn btn-primary btn-lg" href="#projects">View projects</a>
+              <a class="btn btn-outline-light btn-lg" href="https://github.com/Josh-Swan" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn btn-outline-light btn-lg" href="https://www.linkedin.com/in/josh-swan-394977a1/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a class="btn btn-outline-light btn-lg" href="assets/Josh_Swan_CV.pdf" target="_blank" rel="noreferrer">CV</a>
+            </div>
+            
+            <p class="mt-3 mb-0 text-white-50">
+              swan.d.josh@gmail.com
+            </p>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card p-4">
+              <div class="d-flex align-items-center gap-3 flex-wrap">
+                <img class="headshot" src="./assets/me_2.jpeg" alt="Josh Swan headshot" />
+                <div>
+                  <h5 class="fw-semibold mb-1">Overview</h5>
+                  <div class="text-muted2 small mb-3">UK • Senior Data Scientist • 7 years experience with data</div>
+                  <p>Full-time employed Data Scientist currently open for Data Science/AI Engineer roles. Explore my projects
+                    below to see how I solve problems and add value various AI algorithms.
+                  </p>
+                  <div class="d-flex flex-wrap gap-2">
+                    <span class="pill">ML Engineering</span>
+                    <span class="pill">API Development</span>
+                    <span class="pill">Automation</span>
+                    <span class="pill">Stakeholder collaboration</span>
+                    <span class="pill">Data Pipelines</span>
+                    <span class="pill">End-to-end development</span>
+                    <span class="pill">Production-minded</span>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="my-4" />
+
+              <div class="callout">
+                <div class="fw-semibold mb-1">In each project you will find...</div>
+                <div class="small text-muted2">
+                  a clear problem → data → approach → results → architecture → try the model → link to repo
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="content" class="py-5">
+      <div class="container">
+        <!-- Featured Projects -->
+        <section id="projects" class="mb-5">
+          <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <h2 class="fw-bold mb-0">Featured projects</h2>
+            <span class="text-muted2">Click view for full case studies</span>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <div class="card p-4 h-100 project-card">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <h5 class="fw-semibold mb-1">Churn Prediction API</h5>
+                  <span class="badge text-bg-light border">Machine Learning</span>
+                </div>
+                <p class="text-muted2 mb-3">
+                  Trained multiple classifiers, tracked runs in MLflow, tuned the operating threshold, and served
+                  predictions behind a <code>/predict</code> endpoint.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span class="pill">MLflow</span>
+                  <span class="pill">Threshold tuning</span>
+                  <span class="pill">FastAPI</span>
+                  <span class="pill">Fly.io</span>
+                </div>
+                <div class="mt-auto d-flex flex-wrap gap-2">
+                  <a class="btn btn-primary" href="./projects/churn.html">View</a>
+                  <a class="btn btn-outline-secondary" href="https://github.com/Josh-Swan/churn-api-demo" target="_blank" rel="noreferrer">Repo</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card p-4 h-100 project-card">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <h5 class="fw-semibold mb-1">Trinkkets (SaaS)</h5>
+                  <span class="badge text-bg-light border">Startup</span>
+                </div>
+                <p class="text-muted2 mb-3">
+                  Market research platform for online sellers. Custom insights model converting 176,000 real listings a day into seller insights.
+                  Production level automation and infrastructure.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span class="pill">node.js</span>
+                  <span class="pill">Data Science</span>
+                  <span class="pill">Authentication</span>
+                  <span class="pill">Stripe</span>
+                  <span class="pill">End-to-end product</span>
+                </div>
+                <div class="mt-auto d-flex flex-wrap gap-2">
+                  <a class="btn btn-primary" href="projects/trinkkets.html">View</a>
+                  <a class="btn btn-outline-secondary" href="https://trinkkets.com/" target="_blank" rel="noreferrer">Live</a>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="col-lg-4">
+              <div class="card p-4 h-100 project-card">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <h5 class="fw-semibold mb-1">Handwriting Recognition</h5>
+                  <span class="badge text-bg-light border">Deep Learning - CNN</span>
+                </div>
+                <p class="text-muted2 mb-3">
+                  Implementing a CNN deep learning model to classify handwritten digits and basic word formation.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span class="pill soon">Coming soon</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card p-4 h-100 project-card">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <h5 class="fw-semibold mb-1">RAG Pipeline</h5>
+                  <span class="badge text-bg-light border">LLM</span>
+                </div>
+                <p class="text-muted2 mb-3">
+                  RAG pipeline that answers domain questions using vector search, embeddings, and LLM reasoning.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span class="pill soon">Coming soon</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card p-4 h-100 project-card">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <h5 class="fw-semibold mb-1">Customer Review Classification</h5>
+                  <span class="badge text-bg-light border">NLP</span>
+                </div>
+                <p class="text-muted2 mb-3">
+                  A project that summarises customer reviews into semantic topics.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span class="pill soon">Coming soon</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card p-4 h-100 project-card">
+                <div class="d-flex align-items-start justify-content-between gap-2">
+                  <h5 class="fw-semibold mb-1">Cyber Security Detection</h5>
+                  <span class="badge text-bg-light border">Machine Learning</span>
+                </div>
+                <p class="text-muted2 mb-3">
+                  Explore machine learning techniques for detecting suspicious behaviour in system or network 
+                  activity. The project focuses on transforming raw event data into meaningful features.
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span class="pill soon">Coming soon</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="mb-5">
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <h2 class="fw-bold mb-3">About</h2>
+              <p class="mb-3">
+                I'm a UK-based Senior Data Scientist and ML Engineer who enjoys building reliable systems, clean data pipelines, and production-ready machine learning workflows.
+I have 7 years of experience working with Python and SQL across healthcare, academic research, and regulatory environments - building economic models, working with confidential patient data, and applying AI techniques to real-world problems.
+              </p>
+              <p>
+                My portfolio showcases real systems I enjoy building - from concept to production-ready delivery.
+              </p>
+              <p>
+                I am open to opportunities where I can build systems, create impactful products, and deliver real value. If you think I would be a great
+                fit for you, please feel free to get in touch with me.
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-3">Key business interests</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>Solving real-world problems with data and AI</li>
+                  <li>Building efficient automated systems</li>
+                  <li>Turning ideas into working products</li>
+                  <li>Working in small, high-impact teams</li>
+                  <li>Collaborating with strong engineering teams</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="mb-5">
+          <h2 class="fw-bold mb-3">Skills</h2>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">Core</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>Python</li>
+                  <li>SQL (PostgreSQL, MS SQL Server, SQLAlchemy)</li>
+                  <li>Machine Learning (classification, regression)</li>
+                  <li>Deep Learning (FFNNs, CNNs, RNNs)</li>
+                  <li>API Development (REST)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">ML / MLOps</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>scikit-learn, PyTorch, Keras</li>
+                  <li>Experiment tracking (MLflow)</li>
+                  <li>Model evaluation</li>
+                  <li>Serving (FastAPI, Flask)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">Software Engineering</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>Docker</li>
+                  <li>Git</li>
+                  <li>DVC</li>
+                  <li>CI-friendly structure</li>
+                  <li>Cython</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">Communication</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>Clear write-ups</li>
+                  <li>Data visualisation</li>
+                  <li>Stakeholder focus</li>
+                  <li>Experience with clients</li>
+                  <li>Technical presentations</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">Website Development</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>Bootstrap</li>
+                  <li>JavaScript (node.js)</li>
+                  <li>Flask</li>
+                  <li>Render, Fly.io, PythonAnywhere</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">Data Science</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>Pandas, PySpark, NumPy, Matplotlib/Seaborn</li>
+                  <li>Data Transformation/Cleaning</li>
+                  <li>SQL (Postgres)</li>
+                  <li>Data modelling</li>
+                  <li>Data pipelines</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">Cloud Infrastructure</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>Deployment platforms (Render, Fly.io, PythonAnywhere)</li>
+                  <li>Cloud deployment(S3, container deployment)</li>
+                  <li>Familiarity of AWS, Azure and Kubernetes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="mb-0">
+          <div class="card p-4">
+            <div class="row align-items-center g-3">
+              <div class="col-lg-8">
+                <h5 class="fw-bold mb-1">Contact</h5>
+                <div class="text-muted2">
+                  If you have any further questions or would like to consider me for a role, feel free to contact me at <span style="color:black"><strong>swan.d.josh@gmail.com</strong></span>
+                </div>
+              </div>
+              <div class="col-lg-4 text-lg-end">
+                <a class="btn btn-primary" href="mailto:swan.d.josh@gmail.com">Email me</a>
+                <a class="btn btn-outline-secondary ms-2" href="https://www.linkedin.com/in/josh-swan-394977a1/" target="_blank" rel="noreferrer">Message on LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="py-4 mt-5">
+      <div class="container d-flex flex-wrap gap-2 align-items-center justify-content-between">
+        <div class="small">© <span id="year"></span> Josh Swan</div>
+        <div class="small">
+          <a class="text-decoration-none me-3" href="https://www.linkedin.com/in/josh-swan-394977a1/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="text-decoration-none" href="https://github.com/Josh-Swan" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project | Trinkkets</title>
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root{
+        --midnight: #1F2A44;   /* Primary */
+        --steel:    #3F72AF;   /* Secondary */
+        --bg:       #F5F7FA;   /* Background */
+        --card:     #FFFFFF;   /* Cards */
+        --muted:    #9AA5B1;   /* Muted text/borders */
+        --teal:     #2EC4B6;   /* Accent */
+      }
+
+      body { background: var(--bg); }
+
+      /* Navbar */
+      .navbar { background: var(--midnight); }
+      .navbar .nav-link, .navbar-brand { color: rgba(255,255,255,.92); }
+      .navbar .nav-link:hover { color: #fff; }
+
+      /* Hero */
+      .hero {
+        background: radial-gradient(1200px 600px at 10% 0%, rgba(63,114,175,.35), transparent 60%),
+                    radial-gradient(900px 500px at 80% 20%, rgba(46,196,182,.22), transparent 60%),
+                    linear-gradient(180deg, var(--midnight), #162038);
+        color: #fff;
+      }
+
+      .badge-tech {
+        background: rgba(255,255,255,.12);
+        border: 1px solid rgba(255,255,255,.18);
+        color: rgba(255,255,255,.92);
+        font-weight: 500;
+      }
+
+      /* Cards */
+      .card {
+        border: 1px solid rgba(154,165,177,.25);
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(31,42,68,.06);
+        background: var(--card);
+      }
+
+      .btn-primary {
+        background: var(--steel);
+        border-color: var(--steel);
+      }
+      .btn-primary:hover {
+        background: var(--teal);
+        border-color: var(--teal);
+      }
+      .btn-outline-light:hover { color: var(--midnight); }
+
+      .text-muted2 { color: var(--muted) !important; }
+
+      /* Code blocks */
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: .85rem;
+        padding: 1rem;
+        overflow: auto;
+        border: 1px solid rgba(255,255,255,.08);
+        margin-bottom: 0;
+      }
+
+      /* Section headings */
+      .section-title {
+        letter-spacing: .2px;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--midnight);
+        color: rgba(255,255,255,.85);
+      }
+
+      /* Small “stat” pill */
+      .stat {
+        border: 1px solid rgba(154,165,177,.25);
+        border-radius: 999px;
+        padding: .4rem .75rem;
+        background: rgba(245,247,250,.6);
+        font-weight: 600;
+      }
+
+      .callout {
+        border-left: 4px solid var(--teal);
+        background: rgba(46,196,182,.08);
+        border-radius: .75rem;
+        padding: 1rem 1.25rem;
+      }
+
+      /* Offset anchor jumps for sticky navbar */
+      section[id] {
+        scroll-margin-top: 90px; /* adjust to your navbar height */
+      }
+
+      .clickable-img {
+        transition: transform 0.15s ease;
+      }
+
+      .clickable-img:hover {
+        transform: scale(1.02);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="../index.html">Josh Swan</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+            <li class="nav-item"><a class="nav-link" href="#features">Key Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#architecture">Architecture</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero py-5">
+      <div class="container py-4">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <h1 class="display-5 fw-bold mb-3">Trinkkets SaaS</h1>
+            <p class="lead mb-4">
+              A production SaaS platform that analyses millions of marketplace listings to help Etsy sellers identify profitable products and emerging markets.
+            </p>
+
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="badge badge-tech rounded-pill px-3 py-2">Python</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">PostgreSQL</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">SQLAlchemy</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">asyncio</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">aiohttp</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Node.js</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Express</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Bootstrap</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Render</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Machine Learning</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">NLP</span>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-primary btn-lg" href="https://trinkkets.com/" target="_blank">View Trinkkets Platform</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="py-5">
+      <div class="container">
+        <!-- Overview -->
+        <section id="overview" class="mb-5">
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <h2 class="section-title fw-bold mb-3">Overview</h2>
+              <p class="mb-3">
+                The platform is powered by a data pipeline and machine learning 
+                models that transform large volumes of Etsy marketplace data into product insights, demand indicators, and market classifications.
+              </p>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="card p-4 h-100">
+                    <h6 class="fw-semibold mb-2">Problem</h6>
+                    <p class="mb-0 text-muted2">
+                      How can Etsy sellers know what Products & Markets will do well on the Etsy platform?
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card p-4 h-100">
+                    <h6 class="fw-semibold mb-2">Deliverable</h6>
+                    <p class="mb-0 text-muted2">
+                      A web service running a data model that categorises and recommends products/Etsy categories based on millions of real sales records.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <div class="col-lg-4">
+            <div class="card p-4 h-100">
+              <h6 class="fw-semibold mb-3">Tech stack</h6>
+              <ul class="mb-0 text-muted2">
+                <li><strong>Data Pipelines:</strong> Python (asyncio, aiohttp, requests)</li>
+                <li><strong>Machine Learning / NLP:</strong> scikit-learn</li>
+                <li><strong>Database:</strong> PostgreSQL, SQLAlchemy, Psycopg2</li>
+                <li><strong>Backend:</strong> Node.js, Express</li>
+                <li><strong>Frontend:</strong> Bootstrap</li>
+                <li><strong>Deployment:</strong> Render</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="mb-5">
+          <h2 class="section-title fw-bold mb-3">Key Features</h2>
+          <div class="row g-4">
+
+            <!-- Product Search -->
+            <div class="col-lg-6 d-flex">
+              <div class="card p-4 h-100 w-100">
+                <h3>Product Search</h3>
+
+                <p>
+                  The product search engine analyses millions of Etsy listings to identify products with strong demand signals and lower marketplace competition.
+                  A data pipeline aggregates marketplace listings and applies statistical and machine learning techniques to rank products based on supply rarity and demand growth.
+                  This allows sellers to quickly discover products that are both popular and underserved in the marketplace.
+                </p>
+
+                <div class="mt-auto">
+                  <img src="../assets/product_page.png"
+                      alt="A screenshot of the Trinkkets product page."
+                      class="img-fluid rounded clickable-img">
+                </div>
+              </div>
+            </div>
+
+            <!-- Market Search -->
+            <div class="col-lg-6 d-flex">
+              <div class="card p-4 h-100 w-100">
+                <h3>Market Search</h3>
+
+                <p>
+                  Market search aggregates product-level data to analyse entire Etsy categories.
+                  Markets are classified into segments such as Hot, Hidden Gem, Saturated, and Declining, based on their growth rate and competitive intensity.
+                  This allows sellers to identify markets where demand is growing but competition remains manageable.
+                </p>
+
+                <div class="mt-auto">
+                  <img src="../assets/market_page.png"
+                      alt="A screenshot of the Trinkkets market research page"
+                      class="img-fluid rounded clickable-img">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+                <!-- Architecture -->
+        <section id="architecture" class="mb-5">
+          <h2 class="section-title fw-bold mb-3">Architecture</h2>
+
+          <div class="row g-4">
+            <div class="col">
+              <div class="card p-4">
+                <h6 class="fw-semibold mb-3">Flow</h6>
+                <div class="row g-3">
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">1. Data Ingestion</div>
+                      <div class="text-muted2 small">Collect marketplace data from the Etsy API and store raw records in PostgreSQL.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">2. Data Processing Pipeline</div>
+                      <div class="text-muted2 small">Clean, transform and structure the raw data into analysis-ready datasets.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">3. Feature Engineering & Modelling</div>
+                      <div class="text-muted2 small">Apply NLP and machine learning techniques to identify product demand signals and market characteristics.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">4. Database Layer</div>
+                      <div class="text-muted2 small">Processed outputs update analytical views and summary tables in PostgreSQL.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">5. Application Layer</div>
+                      <div class="text-muted2 small">The web platform queries the database to power product search and market analytics features.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">6. Deployment & Automation</div>
+                      <div class="text-muted2 small">Continuous deployment pipeline running on Render with automated data updates and platform availability.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer CTA -->
+        <section class="mb-0">
+          <div class="card p-4">
+            <div class="row align-items-center g-3">
+              <div class="col-lg-8">
+                <h5 class="fw-bold mb-1">Want to see more?</h5>
+                <div class="text-muted2">
+                  View the full repo with additional projects.
+                </div>
+              </div>
+              <div class="col-lg-4 text-lg-end">
+                <a class="btn btn-primary" href="https://github.com/Josh-Swan" target="_blank" rel="noreferrer">View GitHub</a>
+                <a class="btn btn-outline-secondary ms-2" href="../index.html#projects" target="_blank" rel="noreferrer">Back to all projects</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Image Modal -->
+        <div class="modal fade" id="imageModal" tabindex="-1">
+          <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-dark border-0">
+              <div class="modal-body text-center">
+                <img id="modalImage" class="img-fluid rounded">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-4 mt-5">
+      <div class="container d-flex flex-wrap gap-2 align-items-center justify-content-between">
+        <div class="small">© <span id="year"></span> Josh Swan</div>
+        <div class="small">
+          <a class="text-white text-decoration-none me-3" target="_blank" href="https://www.linkedin.com/in/josh-swan-394977a1/">LinkedIn</a>
+          <a class="text-white text-decoration-none" target="_blank" href="https://github.com/Josh-Swan">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      document.querySelectorAll(".clickable-img").forEach(img => {
+      img.style.cursor = "zoom-in";
+
+      img.addEventListener("click", function () {
+        const modalImage = document.getElementById("modalImage");
+        modalImage.src = this.src;
+
+        const modal = new bootstrap.Modal(document.getElementById("imageModal"));
+        modal.show();
+      });
+    });
+    </script>
+    
+  </body>
+</html>

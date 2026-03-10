@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project | Churn Prediction API</title>
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root{
+        --midnight: #1F2A44;   /* Primary */
+        --steel:    #3F72AF;   /* Secondary */
+        --bg:       #F5F7FA;   /* Background */
+        --card:     #FFFFFF;   /* Cards */
+        --muted:    #9AA5B1;   /* Muted text/borders */
+        --teal:     #2EC4B6;   /* Accent */
+      }
+
+      body { background: var(--bg); }
+
+      /* Navbar */
+      .navbar { background: var(--midnight); }
+      .navbar .nav-link, .navbar-brand { color: rgba(255,255,255,.92); }
+      .navbar .nav-link:hover { color: #fff; }
+
+      /* Hero */
+      .hero {
+        background: radial-gradient(1200px 600px at 10% 0%, rgba(63,114,175,.35), transparent 60%),
+                    radial-gradient(900px 500px at 80% 20%, rgba(46,196,182,.22), transparent 60%),
+                    linear-gradient(180deg, var(--midnight), #162038);
+        color: #fff;
+      }
+
+      .badge-tech {
+        background: rgba(255,255,255,.12);
+        border: 1px solid rgba(255,255,255,.18);
+        color: rgba(255,255,255,.92);
+        font-weight: 500;
+      }
+
+      /* Cards */
+      .card {
+        border: 1px solid rgba(154,165,177,.25);
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(31,42,68,.06);
+        background: var(--card);
+      }
+
+      .btn-primary {
+        background: var(--steel);
+        border-color: var(--steel);
+      }
+      .btn-primary:hover {
+        background: var(--teal);
+        border-color: var(--teal);
+      }
+      .btn-outline-light:hover { color: var(--midnight); }
+
+      .text-muted2 { color: var(--muted) !important; }
+
+      /* Code blocks */
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: .85rem;
+        padding: 1rem;
+        overflow: auto;
+        border: 1px solid rgba(255,255,255,.08);
+        margin-bottom: 0;
+      }
+
+      /* Section headings */
+      .section-title {
+        letter-spacing: .2px;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--midnight);
+        color: rgba(255,255,255,.85);
+      }
+
+      /* Small “stat” pill */
+      .stat {
+        border: 1px solid rgba(154,165,177,.25);
+        border-radius: 999px;
+        padding: .4rem .75rem;
+        background: rgba(245,247,250,.6);
+        font-weight: 600;
+      }
+
+      .callout {
+        border-left: 4px solid var(--teal);
+        background: rgba(46,196,182,.08);
+        border-radius: .75rem;
+        padding: 1rem 1.25rem;
+      }
+
+      /* Offset anchor jumps for sticky navbar */
+      section[id] {
+        scroll-margin-top: 90px; /* adjust to your navbar height */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="../index.html">Josh Swan</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+            <li class="nav-item"><a class="nav-link" href="#data">Data</a></li>
+            <li class="nav-item"><a class="nav-link" href="#approach">Approach</a></li>
+            <li class="nav-item"><a class="nav-link" href="#results">Results</a></li>
+            <li class="nav-item"><a class="nav-link" href="#architecture">Architecture</a></li>
+            <li class="nav-item"><a class="nav-link" href="#demo">Try the model</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero py-5">
+      <div class="container py-4">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <h1 class="display-5 fw-bold mb-3">Churn Prediction API</h1>
+            <p class="lead mb-4">
+              Businesses lose revenue when customers leave. This project builds a machine learning model that predicts which customers are likely to churn so that retention teams can intervene early.
+            </p>
+
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="badge badge-tech rounded-pill px-3 py-2">Python</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">scikit-learn</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">FastAPI</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">MLflow</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Docker</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Threshold tuning</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">Parameter grid</span>
+              <span class="badge badge-tech rounded-pill px-3 py-2">REST API</span>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-primary btn-lg" href="#demo">Try the model</a>
+              <a class="btn btn-outline-light btn-lg" href="https://github.com/Josh-Swan/churn-api-demo" target="_blank" rel="noreferrer">GitHub repo</a>
+            </div>
+
+            <p class="mt-3 mb-0 text-white-50 small">
+              Note: Uses a public dataset as a proxy for production workflow; focus is on deployment + reproducibility.
+            </p>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card p-4">
+              <h5 class="fw-semibold mb-3">Model Metrics</h5>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="stat">Recall: 0.85</span>
+                <span class="stat">Precision: 0.61</span>
+                <span class="stat">F1: 0.71</span>
+                <span class="stat">ROC-AUC: 0.90</span>
+              </div>
+
+              <hr class="my-4" />
+
+              <div class="callout">
+                <div class="fw-semibold mb-1">Performance Summary</div>
+                <div class="small text-muted2">
+                  In churn, it is more important to catch customers about to churn that it is to report a false churn. I therefore tuned this model
+                  to increase the Recall and F1 scores.
+                </div>
+                <br/>
+                <div class="small text-muted2">
+                  This uses real data from a marketing firm that is publicly available. Model performance will naturally hit a ceiling without increasing the dataset size and quality.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="py-5">
+      <div class="container">
+        <!-- Overview -->
+        <section id="overview" class="mb-5">
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <h2 class="section-title fw-bold mb-3">Overview</h2>
+              <p class="mb-3">
+                This project demonstrates an end-to-end ML workflow: experiment tracking (MLflow), model selection,
+                threshold tuning, and deployment behind a FastAPI service. The API returns churn probability and a
+                thresholded label suitable for downstream systems. It uses a public churn dataset for a Marketing Agency and their customers buying their advertisments.
+              </p>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="card p-4 h-100">
+                    <h6 class="fw-semibold mb-2">Problem</h6>
+                    <p class="mb-0 text-muted2">
+                      Predict whether a customer will churn based on basic account features. Optimise for recall and F1 to
+                      catch as many churners as possible.
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card p-4 h-100">
+                    <h6 class="fw-semibold mb-2">Deliverable</h6>
+                    <p class="mb-0 text-muted2">
+                      A reproducible training pipeline and a deployable REST endpoint with documented inputs/outputs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-3">Tech stack</h6>
+                <ul class="mb-0 text-muted2">
+                  <li>Python, scikit-learn</li>
+                  <li>MLflow tracking (runs, params, metrics)</li>
+                  <li>Dockerfile</li>
+                  <li>FastAPI + Uvicorn</li>
+                  <li>Model artifact loading (joblib)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Data -->
+        <section id="data" class="mb-5">
+          <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <h2 class="section-title fw-bold mb-0">Data</h2>
+          </div>
+
+          <div class="row g-4">
+            <div class="col mb-4">
+                <p>The below table shows public marketing data for an advertising firm containing details about their customers and if they churned or not.
+                  This data can be used to predict future customers will churn using supervised learning.
+                </p>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <div class="col">
+              <div class="table-responsive position-relative" style="max-height:250px; overflow:hidden;">
+
+              <table class="table table-striped table-bordered">
+              <thead class="table-dark">
+              <tr>
+              <th>Customer ID</th>
+              <th>Age</th>
+              <th>Total Adverts Purchased</th>
+              <th>Account Manager</th>
+              <th>Years</th>
+              <th>Num Sites</th>
+              <th>Onboard Date</th>
+              <th>Churn</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr>
+              <td>1</td>
+              <td>40</td>
+              <td>8283.32</td>
+              <td>1</td>
+              <td>5.1</td>
+              <td>13</td>
+              <td>22/11/2012 05:35</td>
+              <td>1</td>
+              </tr>
+              <tr>
+              <td>2</td>
+              <td>53</td>
+              <td>5515.09</td>
+              <td>0</td>
+              <td>6.85</td>
+              <td>8</td>
+              <td>07/10/2015 00:27</td>
+              <td>1</td>
+              </tr>
+              <tr>
+              <td>3</td>
+              <td>30</td>
+              <td>8403.78</td>
+              <td>1</td>
+              <td>4.13</td>
+              <td>7</td>
+              <td>28/06/2006 09:26</td>
+              <td>0</td>
+              </tr>
+              <tr>
+              <td>4</td>
+              <td>39</td>
+              <td>11159.46</td>
+              <td>0</td>
+              <td>3.95</td>
+              <td>11</td>
+              <td>23/08/2010 13:43</td>
+              <td>0</td>
+              </tr>
+              <tr>
+              <td>5</td>
+              <td>46</td>
+              <td>7026.18</td>
+              <td>0</td>
+              <td>6.3</td>
+              <td>8</td>
+              <td>31/01/2012 23:08</td>
+              <td>0</td>
+              </tr>
+                <tr>
+                <td colspan="8" class="text-center text-muted">...</td>
+                </tr>
+
+                </tbody>
+                </table>
+
+                <div style="
+                position:absolute;
+                bottom:0;
+                left:0;
+                right:0;
+                height:80px;
+                background:linear-gradient(transparent, white);
+                "></div>
+                </div>
+            <p class="mt-1 mb-0 text-black-50 small">
+              Dataset source: 
+              <a href="https://www.kaggle.com/datasets/hassanamin/customer-churn/data" target="_blank">
+              Kaggle Customer Churn Dataset
+              </a>.
+              Full dataset includes 900 customers represented as each row.
+            </p>
+            </div>
+          </div>
+
+        </section>
+
+        <section id="approach" class="mb-5">
+          <h2 class="section-title fw-bold mb-3">Approach and Methodology</h2>
+          <p>
+            The models were chosen for their strong performance of tabular data and different approaches to learning patterns. 
+          </p>
+
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="card p-4">
+                <h6 class="fw-semibold mb-3">Overview</h6>
+                <ul>
+                  <li>4 models trialed</li>
+                  <li>156 runs tracked using MLflow</li>
+                  <li>Metric tracking to determine model performance</li>
+                  <li>Threshold reduced from 0.5 to 0.1 - 0.3 due to moderately imbalanced classes in dataset</li>
+                  <li>Grid parameter search used to expand performance range of runs.</li>
+                  <li>Cross validation used to help fit data better to models</li>
+                  <li>SVM performed the best with a well balanced F1 score to recall score</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="table-responsive position-relative" style="max-height:400px; overflow:hidden;">
+
+              <table class="table table-striped table-bordered">
+              <thead class="table-dark">
+              <tr>
+              <th>Model</th>
+              <th>Reason for inclusion in experiment</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Logistic Regression</td>
+                  <td>Excellent baseline model which can be surprisingly powerful whilst being fairly simple and easy to deploy.</td>
+                </tr>
+                <tr>
+                  <td>Support Vector Machine</td>
+                  <td>Can detect more complex decision boundaries in the data, with a tradeoff of being slower to deploy.</td>
+                </tr>
+                <tr>
+                  <td>Random Forest</td>
+                  <td>Excellent for nonlinear data and can be effective at reducing overfitting.</td>
+                </tr>
+                <tr>
+                  <td>AdaBoost</td>
+                  <td>Misclassified examples can help improve weak learners.</td>
+                </tr>
+                </tbody>
+                </table>
+
+            </div>
+          </div>
+  
+          <div class="col">
+            <img src="../assets/mlflow-churn.png" alt="Screenshot of run results in mlflow" width="90%">
+          </div>
+          </div>
+        </section>
+
+        <!-- Results -->
+        <section id="results" class="mb-5">
+          <h2 class="section-title fw-bold mb-3">Results</h2>
+
+          <div class="row g-4">
+            <div class="col-lg-7">
+              <div class="card p-4">
+                <h6 class="fw-semibold mb-3">Chosen operating point</h6>
+
+                <div class="table-responsive">
+                  <table class="table align-middle mb-0">
+                    <thead>
+                      <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                        <th>Usefulness</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Recall</td>
+                        <td><span class="fw-semibold">0.85</span></td>
+                        <td class="text-muted2">How many churners are correctly caught.</td>
+                      </tr>
+                      <tr>
+                        <td>Precision</td>
+                        <td><span class="fw-semibold">0.61</span></td>
+                        <td class="text-muted2">Controls false positives.</td>
+                      </tr>
+                      <tr>
+                        <td>F1</td>
+                        <td><span class="fw-semibold">0.71</span></td>
+                        <td class="text-muted2">Balanced view of precision vs recall.</td>
+                      </tr>
+                      <tr>
+                        <td>ROC-AUC</td>
+                        <td><span class="fw-semibold">0.90</span></td>
+                        <td class="text-muted2">Strong class separation capability.</td>
+                      </tr>
+                      <tr>
+                        <td>Threshold</td>
+                        <td><span class="fw-semibold">0.30</span></td>
+                        <td class="text-muted2">Lower threshold improves recall for churn.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-lg-5">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">Why this model</h6>
+                  <p>Many model runs achieved a perfect 1 for recall, meaning every churn case is picked up. However, this was at a huge trade-off with precision, leading to very poor
+                    non-churn classifications. The selected run had the highest recall balanced with F1, which from tests reflected the most effective prediction model with a weight towards
+                    catching potential churners.
+                  </p>
+                  <p>
+                    Whilst these scores show decent performance on the chosen model, it is in my view that a larger dataset would be the most effective variable at improving these scores
+                    even further.
+                  </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Architecture -->
+        <section id="architecture" class="mb-5">
+          <h2 class="section-title fw-bold mb-3">Architecture</h2>
+
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <div class="card p-4">
+                <h6 class="fw-semibold mb-3">Flow</h6>
+                <div class="row g-3">
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">1. Outline Problem</div>
+                      <div class="text-muted2 small">Define the value add from solving the problem</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">2. Gather & Clean Data</div>
+                      <div class="text-muted2 small">Collect data (DB, API, webscraping) and clean</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">3. Choose models</div>
+                      <div class="text-muted2 small">Opt for models that are known to be used for this type of problem</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">4. Setup Experiment & runs</div>
+                      <div class="text-muted2 small">Setup experiment in MLflow and connect in Python file</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">5. Train</div>
+                      <div class="text-muted2 small">Train and records metrics & artifacts for each run</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">6. Test & Evaluate Results</div>
+                      <div class="text-muted2 small">Analyse results & search metrics to pick best performance for solving the problem</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">7. Deploy & Serve via FastAPI</div>
+                      <div class="text-muted2 small">Dockerise model and deploy via FastAPI endpoint</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card p-3 h-100">
+                      <div class="fw-semibold">8. CI/CD</div>
+                      <div class="text-muted2 small">Ready for automatic retrain and redeploy using GitHub Actions</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">Next Steps</h6>
+                <p class="text-muted2 mb-3">
+                  To be most effective in a production environment, I would recommend the following next steps:
+                </p>
+                <ul>
+                  <li>Expand available features such as account growth or purchase trends to improve signal</li>
+                  <li>Increase size of dataset, analysing more customers to increase metrics</li>
+                  <li>Examine feature importance using SHAP to understand what features contribute most</li>
+                  <li>Implement model monitoring for data drift and model retraining</li>
+                </ul>
+                <div class="callout">
+                  <div class="fw-semibold mb-1">Data Quality</div>
+                  <div class="text-muted2 small">
+                    The quality of the input data will be the biggest factor in determining prediction quality. Examining the accuracy of the data
+                    at creation could impact this model positively.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Demo -->
+        <section id="demo" class="mb-5">
+          <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <h2 class="section-title fw-bold mb-0">Try the model yourself</h2>
+          </div>
+
+          <div class="row g-4">
+
+            <!-- Prediction Form -->
+            <div class="col">
+              <div class="card p-4 h-100">
+
+                <h6 class="fw-semibold mb-3">Live Prediction</h6>
+
+                <form id="predictForm">
+                  <div class="row">
+                    <div class="col-lg-2 col-md-4 mb-3">
+                      <label class="form-label">Age</label>
+                      <input type="number" class="form-control" id="age" min="18" max="99" required>
+                      <div class="form-text">18 – 99</div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 mb-3">
+                      <label class="form-label">Total Purchase</label>
+                        <input type="number" class="form-control" id="total_purchase" min="0" max="100000" step="0.01" required>
+                      <div class="form-text">$0 – $100,000</div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 mb-3">
+                      <label class="form-label">Account Manager</label>
+                        <select class="form-control" id="account_manager">
+                          <option value="0">No</option>
+                          <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 mb-3">
+                      <label class="form-label">Years</label>
+                      <input type="number" class="form-control" id="years" min="0" max="99" step="0.01" required>
+                      <div class="form-text">0 – 99</div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 mb-3">
+                      <label class="form-label">Number of Sites</label>
+                      <input type="number" class="form-control" id="num_sites" min="0" max="99" required>
+                      <div class="form-text">0 – 99</div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                    <button type="submit" class="btn btn-primary">
+                      Predict
+                    </button>
+
+                    <button type="button" class="btn btn-outline-secondary" onclick="fillRandom()">
+                      Generate Random Example
+                    </button>
+                    </div>
+                  </div>
+                </form>
+
+              <hr>
+
+              <div id="predictionResult" class="mt-3"></div>
+
+              </div>
+            <p class="ms-1 mt-1 mb-0 text-black-50 small">
+              Model served via FastAPI and deployed on Fly.io (public REST endpoint).
+            </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="demo_local" class="mb-5">
+          <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+            <h2 class="section-title fw-bold mb-0">Or run locally</h2>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">1) Clone repo</h6>
+                  <pre><code>git clone https://github.com/Josh-Swan/churn-api-demo.git
+cd churn-api</code></pre>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">2) Install</h6>
+                <pre><code>pip install -r requirements.txt</code></pre>
+                <div class="text-muted2 small mt-2">
+                  Requirements include: fastapi, uvicorn, pandas, joblib, scikit-learn.
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card p-4 h-100">
+                <h6 class="fw-semibold mb-2">3) Start the server</h6>
+                <pre><code>uvicorn app:app --host 0.0.0.0 --port 8000 --reload</code></pre>
+                <div class="text-muted2 small mt-2">
+                  Then open <code>http://localhost:8000/docs</code> to test interactively.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="card p-4">
+                <h6 class="fw-semibold mb-2">4) Example curl</h6>
+                <pre><code>curl -X POST "http://localhost:8000/predict" \
+                -H "Content-Type: application/json" \
+                -d '{"rows":[[45,6749.49,0,5.88,14]]}'</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer CTA -->
+        <section class="mb-0">
+          <div class="card p-4">
+            <div class="row align-items-center g-3">
+              <div class="col-lg-8">
+                <h5 class="fw-bold mb-1">Want to see more?</h5>
+                <div class="text-muted2">
+                  View the full repo with additional projects.
+                </div>
+              </div>
+              <div class="col-lg-4 text-lg-end">
+                <a class="btn btn-primary" href="https://github.com/Josh-Swan" target="_blank" rel="noreferrer">View GitHub</a>
+                <a class="btn btn-outline-secondary ms-2" href="../index.html#projects" target="_blank" rel="noreferrer">Back to all projects</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="py-4 mt-5">
+      <div class="container d-flex flex-wrap gap-2 align-items-center justify-content-between">
+        <div class="small">© <span id="year"></span> Josh Swan</div>
+        <div class="small">
+          <a class="text-white text-decoration-none me-3" target="_blank" href="https://www.linkedin.com/in/josh-swan-394977a1/">LinkedIn</a>
+          <a class="text-white text-decoration-none" target="_blank" href="https://github.com/Josh-Swan">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+<script>
+  const API_URL = "https://churn-api.fly.dev/predict";
+
+  document.getElementById("predictForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const age = parseInt(document.getElementById("age").value);
+    const totalPurchase = parseFloat(document.getElementById("total_purchase").value);
+    const accountManager = parseInt(document.getElementById("account_manager").value);
+    const years = parseFloat(document.getElementById("years").value);
+    const numSites = parseInt(document.getElementById("num_sites").value);
+
+    const payload = { rows: [[age, totalPurchase, accountManager, years, numSites]] };
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      // Friendly display
+      const prob = data.probabilities?.[0]; // first row
+      const probPct = (typeof prob === "number") ? (prob * 100).toFixed(1) : "N/A";
+
+      document.getElementById("predictionResult").innerHTML = `
+        <div class="alert alert-info mb-0">
+          <div><strong>Prediction:</strong> ${data.pred_description ?? "N/A"}</div>
+          <div><strong>Churn probability:</strong> ${probPct}%</div>
+          <div><strong>Threshold:</strong> ${data.threshold ?? "N/A"}</div>
+        </div>
+      `;
+
+    } catch (error) {
+      document.getElementById("predictionResult").innerHTML = `
+        <div class="alert alert-danger mb-0">
+          Error connecting to API
+        </div>
+      `;
+    }
+  });
+
+  function fillRandom() {
+    document.getElementById("age").value = Math.floor(Math.random() * 60) + 18;
+    document.getElementById("total_purchase").value = (Math.random() * 100000).toFixed(2);
+    document.getElementById("account_manager").value = Math.random() > 0.5 ? 1 : 0;
+    document.getElementById("years").value = (Math.random() * 10).toFixed(2);
+    document.getElementById("num_sites").value = Math.floor(Math.random() * 20);
+  }
+</script>
+  </body>
+</html>
